@@ -5,7 +5,7 @@ export class PedidoDto {
     
     @ApiProperty()
     @IsNumber()
-    idproduto: number;
+    produto: number;
     
     @ApiProperty()
     @IsNumber()

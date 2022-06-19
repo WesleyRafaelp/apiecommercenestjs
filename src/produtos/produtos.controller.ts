@@ -4,7 +4,6 @@ import { ApiBearerAuth, ApiHeader, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ProdutoDto } from './dto/produto.dto';
 import { UpdateDto } from './dto/update.dto';
-import { Produto } from './produtos.entity';
 import { ProdutosService } from './produtos.service';
 
 @ApiTags('produtos')
@@ -13,8 +12,6 @@ export class ProdutosController {
     constructor(private readonly produtosService: ProdutosService){}
 
     @Get()
-    @ApiBearerAuth('JWT-auth')
-    @UseGuards(JwtAuthGuard)
     findAll(){
         return this.produtosService.findAll();
     }

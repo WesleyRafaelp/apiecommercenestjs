@@ -1,4 +1,3 @@
-
 import { DataSource } from 'typeorm';
 import { Produto } from './produtos.entity';
 

@@ -1,17 +1,17 @@
-import { IsNumber, IsString,} from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Pedido } from 'src/pedidos/pedidos.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('produtos')
 export class Produto {
-    
+     
     @PrimaryGeneratedColumn()
+    @OneToMany(() => Pedido, (pedido) => pedido.produto)
     idproduto: number;
 
     @Column()
-    @IsString()
     nome: string;
 
     @Column()
-    @IsNumber()
     preco: number;
+
 }

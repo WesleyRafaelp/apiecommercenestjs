@@ -1,15 +1,15 @@
 import { IsNumber } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Produto } from 'src/produtos/produtos.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('pedidos')
-export class Pedido {
-    
+export class Pedido { 
+     
     @PrimaryGeneratedColumn()
     idpedidos: number;
 
-    @Column()
-    @IsNumber()
-    idproduto: number;
+    @ManyToOne(() => Produto, (produto) => produto.idproduto)
+    produto: Produto;
 
     @Column()
     @IsNumber()
