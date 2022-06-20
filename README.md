@@ -1,3 +1,11 @@
+# API REST ecommerce NestJS, MySQL e Swagger
+
+API ecommerce feita com o framework NestJS, usando como banco de dados MySQl e para documentar a API usamos o Swagger.
+
+obs: 
+Para liberar rotas que precisam de autorização, incluir um cadastro no banco de dados e logo após fazer o login, assim recebendo o token e colocando o mesmo em Authorize.
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
