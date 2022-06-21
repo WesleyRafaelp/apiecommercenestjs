@@ -1,4 +1,4 @@
-# API REST ecommerce NestJS, MySQL e Swagger
+# API REST ecommerce NestJS, TypeORM, MySQL e Swagger
 
 API ecommerce feita com o framework NestJS, usando como banco de dados MySQl e para documentar a API usamos o Swagger.
 
