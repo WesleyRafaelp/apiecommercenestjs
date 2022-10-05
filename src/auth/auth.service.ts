@@ -1,20 +1,21 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsuariosService } from 'src/usuarios/usuarios.service';
+import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
-import { LoginDto } from 'src/usuarios/dto/login.dto';
+import { LoginDto } from 'src/users/dto/login.dto';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private usuariosService: UsuariosService,
+        private userService: UsersService,
         private jwtService: JwtService,
     ) { }
 
-    async validateUsuario(email: string, senha: string): Promise<any> {
-        const usuario = await this.usuariosService.findOne(email);
-        if (usuario && bcrypt.compareSync(senha, usuario.senha)) {
-            const { senha, ...result } = usuario;
+    async validateUsuario(email: string, password: string): Promise<any> {
+        const usuario = await this.userService.findOne(email);
+        if (usuario && bcrypt.compareSync(password, usuario.password)) {
+            const { password, ...result } = usuario;
             return result;
         }
         return null;
@@ -25,7 +26,10 @@ export class AuthService {
         const usuario = await this.validateUsuario(user.username, user.password)
         if (usuario) {
             return {
-                access_token: this.jwtService.sign(payload),
+                access_token: this.jwtService.sign(payload, {
+                    privateKey: jwtConstants.secret,
+                    expiresIn: '5min'
+                }),
             }
         }
         throw new NotAcceptableException()

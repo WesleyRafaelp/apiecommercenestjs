@@ -1,36 +1,36 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { PedidoDto } from './dto/pedido.dto';
-import { PedidosService } from './pedidos.service';
+import { OrderDto } from './dto/orders.dto';
+import { OrdersService } from './orders.service';
 
-@ApiTags('pedidos')
-@Controller('pedidos')
-export class PedidosController {
-    constructor(private readonly pedidosService:PedidosService){}
+@ApiTags('orders')
+@Controller('orders')
+export class OrdersController {
+    constructor(private readonly ordersService:OrdersService){}
 
     @Get()
     findAll(){
-        return this.pedidosService.findAll();
+        return this.ordersService.findAll();
     }
 
     @Get(':id')
     findOne(@Param('id') id: number){
-        return this.pedidosService.findOne(id)
+        return this.ordersService.findOne(id)
     }
 
     @Post()
     @ApiBearerAuth('JWT-auth')
     @UseGuards(JwtAuthGuard)
-    create(@Body() pedidoDto: PedidoDto){
-        return this.pedidosService.create(pedidoDto)
+    create(@Body() orderDto: OrderDto){
+        return this.ordersService.create(orderDto)
     }
 
     @Delete(':id')
     @ApiBearerAuth('JWT-auth')
     @UseGuards(JwtAuthGuard)
     remove(@Param('id') id: number){
-        return this.pedidosService.remove(id);
+        return this.ordersService.remove(id);
     }
 }
 

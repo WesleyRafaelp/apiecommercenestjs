@@ -1,13 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString, isString } from "class-validator";
 
-export class ProdutoDto{
+export class CreateProductDto{
     
     @ApiProperty()
     @IsString()
-    nome: string;
+    name: string;
 
     @ApiProperty()
     @IsNumber()
-    preco: number;
+    price: number;
 }
