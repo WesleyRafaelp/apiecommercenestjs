@@ -1,5 +1,5 @@
 import { IsNumber } from 'class-validator';
-import { Product } from 'src/products/products.entity';
+import { Product } from '../products/products.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('orders')

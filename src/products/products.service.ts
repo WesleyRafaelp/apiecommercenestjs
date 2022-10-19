@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable, Req } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/products.dto';
+import { UpdateProductDto } from './dto/update.dto';
 import { Product } from './products.entity';
 
 
@@ -44,9 +45,14 @@ export class ProductsService {
         return await this.productsRepository.save(createProductDto);
     }
 
-    async update(id: number, updateProductDto){
-        const product = await this.productsRepository.update({idproduct: id}, updateProductDto);
-        return product
+    async update(id: number, updateProductDto: UpdateProductDto){
+        const product =  await this.productsRepository.findOne({where: { idproduct: id}})
+        
+        if (!product) {
+            throw new HttpException(`Product ID ${id} not found`, HttpStatus.NOT_FOUND);
+        }
+    
+        return await this.productsRepository.update({idproduct: id}, updateProductDto);
     }
 
     async remove(id:number){

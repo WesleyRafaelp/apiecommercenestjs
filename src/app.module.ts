@@ -8,11 +8,15 @@ import { Order } from './orders/orders.entity';
 import { Product } from './products/products.entity';
 import { User } from './users/users.entity';
 import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+
+      
     }),    
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -31,7 +35,7 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     AuthModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
