@@ -42,17 +42,13 @@ jobs:
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             USER_NAME : ${{ secrets.USER_NAME  }}
             
-        run: |
-          sudo apt-get install openssh-server
-          sudo service ssh start 
-          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} '
+        run: | 
+          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} 
           
-            #Now we have got the access of EC2 and we will start the deploy .
+            #Now we have got the access of EC2 and we will start the deploy.
             cd /app/awsapi &&
             git pull origin master &&
             npm run build &&
             pm2 start "npm run start:prod" -i max &&
             pm2 save &&
             pm2 startup
-            
-        '
