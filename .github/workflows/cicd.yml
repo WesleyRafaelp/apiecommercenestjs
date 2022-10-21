@@ -43,7 +43,9 @@ jobs:
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} '
+          sudo apt-get install openssh-server &&
+          sudo service ssh start &&
+          ssh -o StrictHostKeyChecking=no -i ${PRIVATE_KEY} ${USER_NAME}@${HOSTNAME} &&
           
             #Now we have got the access of EC2 and we will start the deploy .
             cd /app/awsapi &&
