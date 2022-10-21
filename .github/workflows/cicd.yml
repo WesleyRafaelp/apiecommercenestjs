@@ -51,7 +51,7 @@ jobs:
             git fetch --all &&
             git reset --hard origin/master &&
             git pull origin master &&
-            npm run build
+            npm run build &&
             pm2 start "npm run start:prod" -i max &&
             pm2 save &&
             pm2 startup
