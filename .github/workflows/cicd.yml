@@ -30,12 +30,12 @@ jobs:
     - run: npm run build
     - run: npm test
     
-  Deploy:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2 
+      - uses: actions/checkout@v3 
       - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -44,7 +44,7 @@ jobs:
             
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} -tt
+          ssh -o StrictHostKeyChecking=no -i private_key $USER_NAME@$HOSTNAME -tt
           
             #Now we have got the access of EC2 and we will start the deploy.
             cd /app/awsapi &&
