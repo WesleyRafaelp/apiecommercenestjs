@@ -43,7 +43,7 @@ jobs:
             
         run: |
             echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-            ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} -tt
+            ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} -tt '
           
              cd /app/awsapi &&
              git checkout master &&
@@ -54,3 +54,4 @@ jobs:
              pm2 start "npm run start:prod" -i max &&
              pm2 save &&
              pm2 startup
+           '
