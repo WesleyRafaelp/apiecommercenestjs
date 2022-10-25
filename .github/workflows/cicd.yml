@@ -43,10 +43,11 @@ jobs:
             
         run: |
             echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-            ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME}
+            ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} -tt
           
             #Now we have got the access of EC2 and we will start the deploy.
-            cd /app/awsapi &&
+            cd /app &&
+            cd awsapi &&
             git pull origin master &&
             npm run build &&
             pm2 start "npm run start:prod" -i max &&
