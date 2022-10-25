@@ -42,10 +42,14 @@ jobs:
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             
         run: |
-            echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
-            ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} -tt '
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} '
           
-             cd /app/awsapi &&
-             git pull origin master &&
-             npm run build &&
-             '
+            #Now we have got the access of EC2 and we will start the deploy .
+            cd /app/awsapi &&
+            git checkout master &&
+            git fetch --all &&
+            git reset --hard origin/master &&
+            git pull origin master &&
+            npm run build
+          '
