@@ -42,7 +42,7 @@ jobs:
             HOSTNAME : ${{ secrets.HOSTNAME  }}
             
         run: |
-            ssh -i ${{env.PRIVATE_KEY}} ${{env.HOSTNAME}} -tt
+            ssh -i ${PRIVATE_KEY} ${HOSTNAME} -tt
           
             #Now we have got the access of EC2 and we will start the deploy.
             cd /app/awsapi &&
