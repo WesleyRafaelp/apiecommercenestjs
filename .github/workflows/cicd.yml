@@ -46,12 +46,6 @@ jobs:
             ssh -o StrictHostKeyChecking=no -i private_key ${HOSTNAME} -tt '
           
              cd /app/awsapi &&
-             git checkout master &&
-             git fetch --all &&
-             git reset --hard origin/master &&
              git pull origin master &&
              npm run build &&
-             pm2 start "npm run start:prod" -i max &&
-             pm2 save &&
-             pm2 startup
              '
