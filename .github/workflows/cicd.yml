@@ -54,4 +54,4 @@ jobs:
              pm2 start "npm run start:prod" -i max &&
              pm2 save &&
              pm2 startup
-           '
+             '
