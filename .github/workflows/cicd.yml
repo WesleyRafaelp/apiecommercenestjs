@@ -43,8 +43,8 @@ jobs:
             USER_NAME : ${{ secrets.USER_NAME  }}
             
         run: |
-            echo "$PRIVATE_KEY" > private_key && chmod 764 private_key
-            ssh -i ${{env.PRIVATE_KEY}} ${{env.USER_NAME}}@${{env.HOSTNAME}}
+            echo "$PRIVATE_KEY" > private_key && chmod 400 private_key
+            ssh -i private_key ${{env.USER_NAME}}@${{env.HOSTNAME}}
           
             #Now we have got the access of EC2 and we will start the deploy.
             cd /app/awsapi &&
